@@ -19,12 +19,32 @@
 
   <div class="field">
     <%= f.label :age %><br />
-    <%= f.select :age, options_for_select((7..100).to_a, @user.age) %>
+    <%= f.text_field :age, list: "age-options", value: @user.age %> лет
+      <datalist id="age-options">
+        <% (7..100).each do |age| %>
+          <option value="<%= age %>"><%= age %></option>
+        <% end %>
+      </datalist>
   </div>
   
   <div class="field">
     <%= f.label :weight %><br />
-    <%= f.select :weight, options_for_select((20..200).to_a, @user.weight) %>
+    <%= f.text_field :weight, list: "weight-options", value: @user.weight %> кг
+      <datalist id="weight-options">
+        <% (20..200).each do |weight| %>
+          <option value="<%= weight %>"><%= weight %></option>
+        <% end %>
+      </datalist>
+  </div>
+  
+  <div class="field">
+    <%= f.label :height %><br />
+    <%= f.text_field :height, list: "height-options", value: @user.height %> см
+      <datalist id="height-options">
+        <% (100..220).each do |height| %>
+        <option value="<%= height %>"><%= height %></option>
+        <% end %>
+      </datalist>
   </div>
   
   <div class="field">

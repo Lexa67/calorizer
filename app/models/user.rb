@@ -4,7 +4,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  validates :name, :age, :weight, :gender, presence: true
+  validates :name, :age, :weight, :gender, :height, presence: true
   validates :age, numericality: { only_integer: true, greater_than: 0 }
   validates :weight, numericality: { greater_than: 0 }
   validates :gender, inclusion: { in: %w[male female] }
