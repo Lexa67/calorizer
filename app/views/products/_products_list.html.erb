@@ -1,0 +1,9 @@
+<% if products.any? %>
+  <ul>
+    <% products.each do |product| %>
+      <li><%= link_to product.name, product_path(product) %> <%= product.product_type %></li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>No products found</>
+<% end %>

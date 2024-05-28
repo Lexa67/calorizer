@@ -1,6 +1,18 @@
 <p style="color: green"><%= notice %></p>
 
+<%= form_with(url: search_products_path, method: :get, local: true, id: 'search-form') do %>
+  <%= label_tag :search, "Search for product by name:" %>
+  <%= text_field_tag :search, params[:search], id: 'search-input' %>
+<% end %>
+
 <h1>Products</h1>
+
+<div id="products-list">
+  <%= render 'products_list', products: @products %>
+</div>
+
+
+<!-- <h1>Products</h1>
 
 <div id="products">
   <% @products.each do |product| %>
@@ -11,4 +23,4 @@
   <% end %>
 </div>
 
-<%= link_to "New product", new_product_path %>
+<%= link_to "New product", new_product_path %> -->
