@@ -78,3 +78,5 @@ end
 gem "devise", "~> 4.9"
 gem 'httparty'
 gem 'nokogiri'
+gem 'rack-cors'
+

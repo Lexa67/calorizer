@@ -1,26 +1,23 @@
 class ProductsController < ApplicationController
+  skip_before_action :verify_authenticity_token, only: [:search]
+
   before_action :authenticate_user!
   before_action :set_product, only: %i[ show edit update destroy ]
 
-  # GET /products or /products.json
   def index
     @products = Product.all
   end
 
-  # GET /products/1 or /products/1.json
   def show
   end
 
-  # GET /products/new
   def new
     @product = Product.new
   end
 
-  # GET /products/1/edit
   def edit
   end
 
-  # POST /products or /products.json
   def create
     @product = Product.new(product_params)
 
@@ -35,7 +32,6 @@ class ProductsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /products/1 or /products/1.json
   def update
     respond_to do |format|
       if @product.update(product_params)
@@ -48,7 +44,6 @@ class ProductsController < ApplicationController
     end
   end
 
-  # DELETE /products/1 or /products/1.json
   def destroy
     @product.destroy
 
@@ -58,14 +53,24 @@ class ProductsController < ApplicationController
     end
   end
 
+  def search
+    if params[:search].present?
+      @products = Product.where('LOWER(name) LIKE ?', "%#{params[:search].downcase}%")
+    else
+      @products = Product.all
+    end
+    respond_to do |format|
+      format.js # search.js.erb
+    end
+  end
+
   private
-    # Use callbacks to share common setup or constraints between actions.
+  
     def set_product
       @product = Product.find(params[:id])
     end
 
-    # Only allow a list of trusted parameters through.
     def product_params
-      params.require(:product).permit(:name, :type, :protein, :fat, :carbohydrates, :calories)
+      params.require(:product).permit(:name, :product_type, :protein, :fat, :carbohydrates, :calories)
     end
 end
