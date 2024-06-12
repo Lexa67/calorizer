@@ -1,7 +1,10 @@
 <% if products.any? %>
   <ul>
     <% products.each do |product| %>
-      <li><%= link_to product.name, product_path(product) %> <%= product.product_type %></li>
+      <li>
+        <%= link_to product.name, product_path(product) %> <%= product.product_type %>
+        <%= button_to "Добавить", add_product_path(product), method: :post, remote: true, class: "add-product-button", data: { product_id: product.id, product_name: product.name, product_protein: product.protein, product_fat: product.fat, product_carbohydrates: product.carbohydrates } %>
+      </li>
     <% end %>
   </ul>
 <% else %>
