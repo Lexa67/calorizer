@@ -82,3 +82,6 @@ gem 'httparty'
 gem 'nokogiri'
 gem 'rack-cors'
 
+gem 'rails-ujs'
+gem 'jquery-rails'
+

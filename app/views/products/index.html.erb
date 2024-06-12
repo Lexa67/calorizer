@@ -5,22 +5,33 @@
   <%= text_field_tag :search, params[:search], id: 'search-input' %>
 <% end %>
 
-<h1>Products</h1>
+<p>Ваш вес составляет <%= current_user.weight %> кг</p>
+<p>У вас <%= @mobility_options[current_user.mobility - 1] %></p>
+<p>Ваша цель: <%= current_user.goal %></p>
+<ul>Количество килокалорий на день составляет <%= @calories_for_user %> Ккал или
+  <li id="daily_proteins"><%= @proteins %> г белков</li>
+  <li id="daily_fats"><%= @fats %> г жиров</li>
+  <li id="daily_carbohydrates"><%= @carbohydrates %> г углеводов</li>
+</ul>
+<div>
+  <h2>Выбранные продукты</h2>
 
-<div id="products-list">
-  <%= render 'products_list', products: @products %>
+  <div id="selected_products_list">
+    <p id="total_protein">Общие белки: 0</p>
+    <p id="total_fat">Общие жири: 0</p>
+    <p id="total_carbohydrates">Общие углеводы: 0</p>
+  </div>
 </div>
-
-
-<!-- <h1>Products</h1>
-
 <div id="products">
-  <% @products.each do |product| %>
-    <%= render product %>
-    <p>
-      <%= link_to "Show this product", product %>
-    </p>
-  <% end %>
+  <h1>Products</h1>
+  <div id="products-list">
+    <%= render 'products_list', products: @products %>
+    <%= javascript_include_tag "products" %>
+  </div>
 </div>
 
-<%= link_to "New product", new_product_path %> -->
+<script>
+  var dailyProteins = <%= @proteins %>;
+  var dailyFats = <%= @fats %>;
+  var dailyCarbohydrates = <%= @carbohydrates %>;
+</script>

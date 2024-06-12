@@ -54,6 +54,22 @@
   </div>
 
   <div class="field">
+    <%= f.label :goal, "Цель" %><br />
+    <%= f.select :goal, options_for_select(User::GOALS.map { |goal| [goal.capitalize, goal] }) %>
+  </div>
+  
+  <div class="field">
+    <%= f.label :mobility, "Подвижность" %><br />
+    <% mobility_options = [
+          ['Очень низкая подвижность (сидячий образ жизни)', 1],
+          ['Низкая подвижность (небольшая физическая активность)', 2],
+          ['Средняя подвижность (регулярные занятия спортом)', 3],
+          ['Высокая подвижность (активный образ жизни)', 4],
+          ['Очень высокая подвижность (интенсивные тренировки)', 5]
+        ] %>
+    <%= f.select :mobility, options_for_select(mobility_options) %>  </div>
+
+  <div class="field">
     <%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
     <%= f.password_field :password, autocomplete: "new-password" %>
     <% if @minimum_password_length %>
